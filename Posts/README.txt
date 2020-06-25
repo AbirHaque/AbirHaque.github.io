@@ -1,0 +1,1 @@
+This file must be present if there are no other files present!
