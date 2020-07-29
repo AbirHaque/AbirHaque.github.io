@@ -56,8 +56,8 @@
       			<li><a href="../blog.html">Blog</a></li>
     		</ul>
 	<dl>
-<a href="../index.html">Abir Haque</a>, July 24, 2020
-        <dd>Developers often receive such an exception when people sign a Xamarin APK, debug the project, and then attempt to rebuild the project in a debug state. When such an exception occurs, Visual Studio hauntingly greets developers with the following dialogue box:
+<a href="../index.html"><b>Abir Haque</b></a>, <i>July 24, 2020</i>
+        <dd><br>Developers often receive such an exception when people sign a Xamarin APK, debug the project, and then attempt to rebuild the project in a debug state. When such an exception occurs, Visual Studio hauntingly greets developers with the following dialogue box:
 <br>
 <img src="../Images/XVSH_uninstall/1.png" height="120px" alt="1">
 <br>
@@ -73,7 +73,6 @@ However, there is one workaround to this. The following instructions are perfect
 <br><br><b>1.</b> Go to the top right corner of Visual Studio, and click the "Android Toolbar Option" menu.<br><img src="../Images/XVSH_uninstall/3.png" height="90px" alt="3"><br><b>2.</b> Click on the console icon labeled "Android Adb Command Prompt".<br><img src="../Images/XVSH_uninstall/4.png" height="90px" alt="4"><br><b>3.</b> Clicking the icon navigates you to your project's directory via command line.<br>If you opted to skip Steps 1 and 2, please open your system's command line, and enter the following, with the command format matching your operating system and your information filled in:<br><i>cd PATH_TO_PROJECT\PROJECT_NAME \PROJECT_NAME.Android</i><br><br><b>4.</b> Enter the following, with your information filled in:<br><i>adb uninstall com.COMPANY_NAME.PROJECT_NAME</i><br><br><b>5.</b> You will receive great news. You may now close the command line.<br><b>6.</b> Build and deploy your project to a connected Android device.<br><br><b>7.</b> Congratulations! XAML Hot Reload is connect, so you should see your project up and running on your device!<br><img src="../Images/XVSH_uninstall/ss2.png" height="400px" alt="ss2">
 <br><br><b>Sources:</b><br>
 <a href="https://docs.microsoft.com/en-us/xamarin/android/errors-and-warnings/adb0030" target="_blank">https://docs.microsoft.com/en-us/xamarin/android/errors-and-warnings/adb0030</a><br>
-<a href="https://stackoverflow.com/questions/44735522/cant-deploy-to-real-android-device-		xamarin"target="_blank">https://stackoverflow.com/questions/44735522/cant-deploy-to-real-android-device-xamarin</a><br>
 <a href="https://christophweigert.com/fix-visual-studio-mono-androidtools-requiresuninstallexception/" 		target="_blank">https://christophweigert.com/fix-visual-studio-mono-androidtools-requiresuninstallexception/</a>
 	</dd></dl>
 	</body>
