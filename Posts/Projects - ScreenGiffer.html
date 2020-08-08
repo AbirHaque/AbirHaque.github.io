@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<meta name="Description" content="Just another site"><meta name="keywords" content="">
+	<meta name="author" content="Abir Haque">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+<title>Projects: ScreenGiffer</title>
+		<link rel="icon" href="https://yt3.ggpht.com/a-/AOh14GjaYwmLL1Ts5Wv6wxy_nq949iXrNlMAiVezw516=s88-c-k-c0xffffffff-no-rj-mo">
+		<style>
+      		body {
+        		font-size: 16px;
+        		font-family: Arial, Helvetica, sans-serif;
+			padding: 10% 10%;
+      		}	
+
+      		header {
+        		text-align:center;
+        		font-size: 24px	
+      		}
+
+      		ul {
+        		list-style-type: none;
+        		margin: 0;
+        		padding: 0;
+        		overflow: hidden;
+        		background-color: #000000;
+        		position: -webkit-sticky;
+        		position: sticky;
+        		top: 0;
+      		}
+
+      		li {
+      			float: right
+      		}
+
+      		li a {
+        		display: block;
+        		color: white;
+        		text-align: center;
+        		padding: 12px 12px;
+      		}
+    		</style>
+	</head>
+	<body>
+	<div>
+      		<header>
+        		<h2><i>Projects: ScreenGiffer</i></h2>
+      		</header>
+    		</div>
+    		<ul>
+      			<li><a href="../contact.html">Contact</a></li>
+      			<li><a href="../projects.html">Projects</a></li>
+      			<li><a href="../about.html">About</a></li>
+      			<li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">|</a></li>
+      			<li><a href="../blog.html">Blog</a></li>
+    		</ul>
+	<dl>
+<a href="../index.html"><b>Abir Haque</b></a>, <i>August 7, 2020</i>
+<dd><br>
+<img src="../Images/ScreenGiffer_gifs/gif1.gif" height="320px" alt="1"><br><br>
+<a href="https://github.com/AbirHaque/ScreenGiffer" target="_blank">ScreenGiffer</a> is quick weekend a project I embarked on for a few reasons. One reason is that I really did not want to be academically productive, meaning I still have not finished my CS Extended Essay, nor have I finished my Physics Internal Assessment, but schoolwork is outside of the scope of this post. My main reason for creating ScreenGiffer is to record snippets of screen activity on my Raspberry Pi, as I have a few limitation preventing me from using otherwise effective solutions.
+<br><br>
+A 16GB miniSD card serves as my Rasberry Pi's hard drive, with the Raspbian OS taking a good portion of the space. While 16GB is still sufficient to store personal files alongside OS files, I tend avoid software downloads exceeding 50 MB as a result. Also the Raspberry Pi is not exactly known as being the best at high-performance computing, so processing videos on such a device would not be too fun. In addition, my Raspberry Pi rarely establishes a strong wireless internet connection, so I rarely download any software directly from the internet. I certainly have an ethernet cable, but please let me have the excuse to code my own software on my Raspberry Pi.<br><br>
+<img src="../Images/ScreenGiffer_gifs/gif2.gif" height="320px" alt="2"><br><br>
+<b>Disclaimer:</b> A great amount of code used for this project was not created by me. I merely took implementations I found from articles online to create a solution I could not find on the internet. I will constantly provide references in code comments. All references are also available in the <a href="#sources">Sources</a> section.<br><br>
+The development of ScreenGiffer was broken down into figuring out how to programmatically do the following:<br>
+1. Capture multiple screenshots.<br>
+2. Produce a GIF from a series of images.<br>
+<br>
+To capture a screenshot, the following was implemented:<br>
+<br>
+<i>//Classes needed to capture a screenshot<br></i><b>
+import java.awt.*;<br>
+import java.awt.image.*;<br></b>
+<i>//Classes needed to output an image file from an image input<br></i><b>
+import java.io.*;<br>
+import javax.imageio.*;<br></b>
+<i>//Modified from the implementation present here: <a href="https://www.codejava.net/java-se/graphics/how-to-capture-screenshot-programmatically-in-java" target="_blank">https://www.codejava.net/java-se/graphics/how-to-capture-screenshot-programmatically-in-java</a>
+<br></i><b>
+public class ScreenGiffer<br>
+{ <br>
+	&emsp;public static void main(String args[]) <br>
+	&emsp; { <br>
+		&emsp; &emsp; try<br>
+		&emsp; &emsp; {<br>
+			&emsp; &emsp; &emsp; Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); <br>
+			&emsp; &emsp; &emsp; Robot robot = new Robot(); <br>
+			&emsp; &emsp; &emsp; BufferedImage img = robot.createScreenCapture(new Rectangle(size));   <br>         
+			&emsp; &emsp; &emsp; File save_path = new File("frame.jpg");<br>
+			&emsp; &emsp; &emsp; ImageIO.write(img, "JPG", save_path); <br>
+		&emsp; &emsp; }<br>
+		&emsp; &emsp; catch(Exception e)<br>
+		&emsp; &emsp; {<br><br>
+			&emsp; &emsp; &emsp; System.out.println("Failed to capture a screenshot.");<br>
+		&emsp; &emsp; }<br> 
+	&emsp; }<br>
+}<br></b>
+<br>
+We need to take multiple screenshots. Our code will be modified with a for loop:<br><br><b>
+import java.awt.*;<br>
+import java.awt.image.*;<br>
+import java.io.*;<br>
+import javax.imageio.*;<br>
+<br>
+public class ScreenGiffer<br>
+{ <br>
+	&emsp; public static void main(String args[]) <br>
+	&emsp; { <br>
+		&emsp; &emsp; try<br>
+		&emsp; &emsp; {<br>
+        		&emsp; &emsp; &emsp; int frames = 50;</b><i>//Modify this number as you please. 50 frames will provide a 5 second GIF</i><br><b>
+        		&emsp; &emsp; &emsp; try<br>
+        		&emsp; &emsp; &emsp; { <br>
+            			&emsp; &emsp; &emsp; &emsp; for (int i = 0; i < frames; i++)<br>
+            			&emsp; &emsp; &emsp; &emsp; {<br>
+                			&emsp; &emsp; &emsp; &emsp; &emsp; Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); <br>
+                			&emsp; &emsp; &emsp; &emsp; &emsp; Robot robot = new Robot(); <br>
+                			&emsp; &emsp; &emsp; &emsp; &emsp; BufferedImage img = robot.createScreenCapture(new Rectangle(size));<br>             
+                			&emsp; &emsp; &emsp; &emsp; &emsp; File save_path = new File("output/frame" + i + ".jpg");</b><i>//"output/" is present to organize all frames into a subdirectory labeled "output". Modify this as you please </i><b><br>
+                			&emsp; &emsp; &emsp; &emsp; &emsp; ImageIO.write(img, "JPG", save_path); <br>
+            			&emsp; &emsp; &emsp; &emsp; }<br>
+        		&emsp; &emsp; &emsp; } <br>
+        		&emsp; &emsp; &emsp; catch(Exception e) <br>
+        		&emsp; &emsp; &emsp; { <br>
+				&emsp; &emsp; &emsp; &emsp; System.out.println("Failed to record.");<br>
+        		&emsp; &emsp; &emsp; }<br>
+		&emsp; &emsp; }<br>
+	&emsp; }<br>
+}<br></b>
+<br>
+Now that we can capture multiple images, lets create a GIF. We will first need a GifSequenceWriter class that abstracts the GIF writing process in the main class for us:<br>
+<br>
+<i>//A few more classes, this time for input and output with images and GIFs<br></i><b>
+import javax.imageio.*;<br>
+import javax.imageio.metadata.*;<br>
+import javax.imageio.stream.*;<br>
+import java.awt.image.*;<br>
+import java.io.*;<br></b>
+<i>//Original implementation present here: <a href="https://memorynotfound.com/generate-gif-image-java-delay-infinite-loop-example/" target="_blank">https://memorynotfound.com/generate-gif-image-java-delay-infinite-loop-example/</a></i>
+<br><b>
+public class GifSequenceWriter <br>
+{<br>
+	&emsp; protected ImageWriter writer;<br>
+    	&emsp; protected ImageWriteParam params;<br>
+    	&emsp; protected IIOMetadata metadata;<br>
+<br>
+    	&emsp; public GifSequenceWriter(ImageOutputStream out, int imageType, int delay, boolean loop) throws IOException <br>
+	&emsp; {<br>
+        	&emsp; &emsp; writer = ImageIO.getImageWritersBySuffix("gif").next();<br>
+        	&emsp; &emsp; params = writer.getDefaultWriteParam();<br>
+<br>
+        	&emsp; &emsp; ImageTypeSpecifier imageTypeSpecifier = ImageTypeSpecifier.createFromBufferedImageType(imageType);<br>
+        	&emsp; &emsp; metadata = writer.getDefaultImageMetadata(imageTypeSpecifier, params);<br>
+<br>
+        	&emsp; &emsp; configureRootMetadata(delay, loop);<br>
+<br>
+        	&emsp; &emsp; writer.setOutput(out);<br>
+      		&emsp; &emsp; writer.prepareWriteSequence(null);<br>
+    	&emsp; }<br>
+	<br>
+    	&emsp; private void configureRootMetadata(int delay, boolean loop) throws IIOInvalidTreeException <br>
+	&emsp; {<br>
+        	&emsp; &emsp; String metaFormatName = metadata.getNativeMetadataFormatName();<br>
+        	&emsp; &emsp; IIOMetadataNode root = (IIOMetadataNode) metadata.getAsTree(metaFormatName);<br>
+<br>
+        	&emsp; &emsp; IIOMetadataNode graphicsControlExtensionNode = getNode(root, "GraphicControlExtension");<br>
+        	&emsp; &emsp; graphicsControlExtensionNode.setAttribute("disposalMethod", "none");<br>
+        	&emsp; &emsp; graphicsControlExtensionNode.setAttribute("userInputFlag", "FALSE");<br>
+        	&emsp; &emsp; graphicsControlExtensionNode.setAttribute("transparentColorFlag", "FALSE");<br>
+        	&emsp; &emsp; graphicsControlExtensionNode.setAttribute("delayTime", Integer.toString(delay / 10));<br>
+        	&emsp; &emsp; graphicsControlExtensionNode.setAttribute("transparentColorIndex", "0");<br>
+<br>
+        	&emsp; &emsp; IIOMetadataNode appExtensionsNode = getNode(root, "ApplicationExtensions");<br>
+        	&emsp; &emsp; IIOMetadataNode child = new IIOMetadataNode("ApplicationExtension");<br>
+        	&emsp; &emsp; child.setAttribute("applicationID", "NETSCAPE");<br>
+        	&emsp; &emsp; child.setAttribute("authenticationCode", "2.0");<br>
+<br>
+        	&emsp; &emsp; child.setUserObject(new byte[]{ 0x1, (byte) (0 & 0xFF), (byte) ((0 >> 8) & 0xFF)});<br>
+        	&emsp; &emsp; appExtensionsNode.appendChild(child);<br>
+        	&emsp; &emsp; metadata.setFromTree(metaFormatName, root);<br>
+    	&emsp; }<br>
+<br>
+    	&emsp; private static IIOMetadataNode getNode(IIOMetadataNode rootNode, String nodeName)<br>
+	&emsp; {<br>
+        	&emsp; &emsp; int nNodes = rootNode.getLength();<br>
+        	&emsp; &emsp; for (int i = 0; i < nNodes; i++)<br>
+		&emsp; &emsp; {<br>
+            		&emsp; &emsp; &emsp; if (rootNode.item(i).getNodeName().equalsIgnoreCase(nodeName))<br>
+	    		&emsp; &emsp; &emsp; {	<br>
+                		&emsp; &emsp; &emsp; &emsp; return (IIOMetadataNode) rootNode.item(i);<br>
+            		&emsp; &emsp; &emsp; }<br>
+        	&emsp; &emsp; }<br>
+        	&emsp; &emsp; IIOMetadataNode node = new IIOMetadataNode(nodeName);<br>
+        	&emsp; &emsp; rootNode.appendChild(node);<br>
+        	&emsp; &emsp; return(node);<br>
+    	&emsp; }<br>
+<br>
+    	&emsp; public void writeToSequence(RenderedImage img) throws IOException <br>
+    	&emsp; {<br>
+       		&emsp; &emsp; writer.writeToSequence(new IIOImage(img, null, metadata), params);<br>
+    	&emsp; }<br>
+<br>
+    	&emsp; public void close() throws IOException <br>
+	&emsp; {<br>
+        	&emsp; &emsp; writer.endWriteSequence();<br>
+    	&emsp; }<br>
+}<br></b>
+<br>
+Let us reference this class in our ScreenGiffer class:<br>
+<br><i>
+//A few more classes, this time do do the work of adding images into the GIF sequence<br></i><b>
+import java.io.*;  <br>
+import java.awt.*;<br>
+import java.awt.event.*;<br>
+import java.awt.image.*; <br>
+import javax.imageio.*;<br>
+import javax.imageio.metadata.*;<br>
+import javax.imageio.stream.*;<br>
+public class ScreenGiffer<br>
+{ <br>
+	&emsp; public static void main(String args[]) <br>
+    	&emsp; { <br>
+        	&emsp; &emsp; int frames = 50;<br>
+        	&emsp; &emsp; File[] imageList = new File[frames];</b><i>//Array for image files to be sequenced<br></i><b>
+        	&emsp; &emsp; try<br>
+        	&emsp; &emsp; { <br>
+            		&emsp; &emsp; &emsp; for (int i = 0; i < frames; i++)<br>
+            		&emsp; &emsp; &emsp; {<br>
+                		&emsp; &emsp; &emsp; &emsp; Dimension size = Toolkit.getDefaultToolkit().getScreenSize();<br> 
+                		&emsp; &emsp; &emsp; &emsp; Robot robot = new Robot(); <br>
+                		&emsp; &emsp; &emsp; &emsp; BufferedImage img = robot.createScreenCapture(new Rectangle(size)); <br>            
+                		&emsp; &emsp; &emsp; &emsp; File save_path = new File("output/frame" + i + ".jpg");<br>
+                		&emsp; &emsp; &emsp; &emsp; imageList[i] = save_path;<br>
+                		&emsp; &emsp; &emsp; &emsp; ImageIO.write(img, "JPG", save_path); <br>
+            		&emsp; &emsp; &emsp; }<br>
+        	&emsp; &emsp; } <br>
+        	&emsp; &emsp; catch(Exception e) <br>
+        	&emsp; &emsp; { <br>
+			&emsp; &emsp; &emsp; System.out.println("Failed to record.");<br>
+        	&emsp; &emsp; }<br>
+        	&emsp; &emsp; try<br>
+        	&emsp; &emsp; {<br>
+			&emsp; &emsp; &emsp; BufferedImage first = ImageIO.read(new File("output/frame0.jpg"));<br>
+        		&emsp; &emsp; &emsp; ImageOutputStream output = ImageIO.createImageOutputStream(new File("output/output/output.gif"));</b><i>//Subdirectory within a subdirectory to store the GIF. Modify this as you please<br>
+			&emsp; &emsp; &emsp; /**<br>
+			&emsp; &emsp; &emsp; * How the GifSequenceWriter call is set up:<br>
+			&emsp; &emsp; &emsp; * GifSequenceWriter(<br>
+			&emsp; &emsp; &emsp; * 	ImageOutputStream object of your GIF's output directory,<br>
+			&emsp; &emsp; &emsp; * 	String object of your image file format, <br>
+                        &emsp; &emsp; &emsp; * 	Integer dictating millisecond delays between images in GIF sequence,<br>
+                        &emsp; &emsp; &emsp; * 	Boolean dictating if the GIF loops<br>
+			&emsp; &emsp; &emsp; * );<br>
+			&emsp; &emsp; &emsp; **/<br></i><b>
+        		&emsp; &emsp; &emsp; GifSequenceWriter writer = new GifSequenceWriter(output, first.getType(), 10, true);<br>
+        		&emsp; &emsp; &emsp; writer.writeToSequence(first);<br>
+<br>
+        		&emsp; &emsp; &emsp; for (File image : imageList)<br>
+			&emsp; &emsp; &emsp; {<br>
+            			&emsp; &emsp; &emsp; &emsp; BufferedImage next = ImageIO.read(image);<br>
+            			&emsp; &emsp; &emsp; &emsp; writer.writeToSequence(next);<br>
+        		&emsp; &emsp; &emsp; }<br>
+<br>
+        		&emsp; &emsp; &emsp; writer.close();<br>
+        		&emsp; &emsp; &emsp; output.close();<br>
+        	&emsp; &emsp; }<br>
+        	&emsp; &emsp; catch(Exception e) <br>
+        	&emsp; &emsp; { <br>
+			&emsp; &emsp; &emsp; label.setText("Failed to create gif.");<br>
+        	&emsp; &emsp; }<br>
+	&emsp; } <br>
+}<br></b>
+<br>
+All of this provides a barebones implementation of ScreenGiffer. However, several features are missing. Examples include:<br>
+- A countdown time before recording<br>
+- Reducing the amount of hardcoded values, such as GIF length<br>
+- A GUI<br>
+<br>
+However, these implementations are already in place in ScreenGiffer's <a href="https://github.com/AbirHaque/ScreenGiffer" target="_blank">repository</a>. If you want to check it out, test it, or even contribute, please feel free to do so.<br>
+<br>And if anyone is curious, here is a GIF recording of a GIF recording on a Raspberry PI:<br><br>
+<img src="../Images/ScreenGiffer_gifs/gif3.gif" height="320px" alt="3"><br><br>
+Clearly some performance issues need to be addressed!<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<b id="sources">Sources:</b><br>
+	
+	<a href="https://www.codejava.net/java-se/graphics/how-to-capture-screenshot-programmatically-in-java" target="_blank">https://www.codejava.net/java-se/graphics/how-to-capture-screenshot-programmatically-in-java</a><br>
+	<a href="https://memorynotfound.com/generate-gif-image-java-delay-infinite-loop-example/" target="_blank">https://memorynotfound.com/generate-gif-image-java-delay-infinite-loop-example/</a><br>
+	<a href="https://www.amazon.com/Fundamentals-Java-Introductory-Course-2ND/dp/B003MV8XYY" target="_blank">Fundamentals of Java, Introductory Course</a><br><br>
+
+</dd></dl>
+	</body>
+<html>    
