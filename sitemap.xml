@@ -33,14 +33,24 @@
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>https://abirhaque.github.io/index.html</loc>
+  <lastmod>2020-07-24T19:06:22+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
   <loc>https://abirhaque.github.io/Posts/Xamarin%20Visual%20Studio%20Help%20-%20ADB0030%20-%20Mono.AndroidTools.RequiresUninstallException.html</loc>
   <lastmod>2020-07-24T19:06:22+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://abirhaque.github.io/index.html</loc>
-  <lastmod>2020-07-24T19:06:22+00:00</lastmod>
-  <priority>0.51</priority>
+  <loc>https://abirhaque.github.io/Posts/IDE%20Review%20-%20Replit.html</loc>
+  <lastmod>2020-08-08T19:06:22+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://abirhaque.github.io/Posts/Projects%20-%20ScreenGiffer.html</loc>
+  <lastmod>2020-08-08T19:06:22+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 
