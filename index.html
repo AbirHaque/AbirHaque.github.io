@@ -1,65 +1,134 @@
 <!DOCTYPE html>
-<html>
-  <meta charset="UTF-8">
-  <meta name="description" content="Just another site">
-  <meta name="keywords" content="">
-  <meta name="author" content="Abir Haque">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <head>
-    <title>Abir Haque</title>
-    <link rel="icon" href="https://yt3.ggpht.com/a-/AOh14GjaYwmLL1Ts5Wv6wxy_nq949iXrNlMAiVezw516=s88-c-k-c0xffffffff-no-rj-mo">
-    <style>
-      body {
-        font-size: 16px;
-        font-family: Arial, Helvetica, sans-serif;
-	padding: 10% 10%;
-      }
+<html lang="en">
 
-      header {
-        text-align:center;
-        font-size: 24px	
-      }
+<head>
+	<title>Abir Haque</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #000000;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-      }
+<body>
 
-      li {
-        float: right
-      }
+	<div class="jumbotron text-center">
+		<h1>Abir Haque</h1>
+		<p>Bachelor of Science in Computer Science | University of Kansas | Class of 2025</p>
+	</div>
 
-      li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 12px 12px;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <header>
-        <h1><i>Abir Haque</i></h1>
-      </header>
-    </div>
-    <ul>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="documents.html">Documents</a></li>
-    </ul>
-    <dl>
-      <dd><br>Hello, I'm Abir Haque, and welcome to my personal website.</dd>
-      <br>
-      <dd>I enjoy working out, electronic music, and programming!</dd>
-      <br>
-	  </dl>
-    </body>
+	<div class="container">
+		<div class="row">
+			<h2 class="text-center">About</h2>
+			<p>I am a sophomore studying Computer Science at the University of Kansas. My interests include, but are not
+				limited to:
+			<ul>
+				<li><b> Securing the Internet of Things</b> (IoT)</li>
+				<li><b> Parallel Scientific Computing</b></li>
+				<li><b> Music Digital Signal Processing</b> (DSP)</li>
+				<li><b>Computing Education</b></li>
+			</ul>
+			</p>
+			<p>Notable positions that I have held include the following:
+
+			<ul>
+				<li><b><u> Undergraduate Research Assistant</u></b> at the <b>
+						Institute for
+						Information Sciences</b> at the University of Kansas</li>
+				<li> <b><u> Summer Undergraduate Research Intern</u></b> at <b>
+						Indiana
+						University-Purdue University Indianapolis</b></li>
+				<li> <b><u> Volunteer Peer Tutor</u></b> for the <b> Association of
+						Computing Machinery
+						Student
+						Chapter</b> at the University of Kansas.</li>
+			</ul>
+			</p>
+			<p>I am excited to announce that I have accepted a position at
+				<b>Garmin</b> as a <b>Summer Software Engineer Intern</b>!
+			</p>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div>
+			<h2 class="text-center">Selected Projects</h2>
+			<p>I work on multiple projects in addition to my required computer science coursework. Many
+				are direct results of my explorations in my research interests. The
+				following are select projects I am extremely proud of and have made decent progress:</p>
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>MuseEQ Suite</h3><img src="https://abirhaque.github.io/Images/MuseEQ.png" width="100%"><br>
+					<p>This is an <b>award-winning</b> project for Hack K-State 2022, a 36-hour hackathon that occured November
+						2022.
+						I collaborated within a 3-person team to develop a <b>GTK</b> minimal <b>digital audio workstation</b> (DAW)
+						and
+						full-stack React Native mobile app. The novelty of this project includes timbres being user-defined
+						equations parsed by our implementation of <b>Dijkstra’s Shunting Yard algorithm</b>. Audio mixing is
+						<b>multithreaded</b> with Python’s Threading module. This project won Best Use of
+						AppWrite, a self-hosted, no-code back-end solution.
+					</p>
+				</div>
+				<div class="col-sm-6">
+					<h3>Sentinel IoT Camera</h3><img src="https://abirhaque.github.io/Images/Sentinel.jpg" width="100%"><br>
+					<p>This project involves developing the <b>ESP32-CAM microcontroller</b> to securely connect to network by
+						receiving credentials via HTTPS. The novelty of this project includes <b>managing device certificates</b>
+						with a
+						<b>Node.js REST API</b>. End users receive the device certificate by scanning the device’s QR code, which
+						contains the certificate’s GET request link. This project is inspired by Bitdefender white paper titled
+						<b><i>Ring Video Doorbell Pro Under the Scope</i></b>, which outlines a vulnerability that allows an
+						attacker to <b>intercept device owner’s network credentials</b>. This is an <b>ongoing project</b> that
+						began August 2022.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>Pineapple Math</h3><img
+						src="https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/001/899/375/datas/medium.png"
+						width="50%"><br>
+					<p>This is an <b>award-winning</b> project for Hack KU 2022, a 36-hour hackathon that occured April 2022.
+						I collaborated within a 4-person team to develop a <b>full-stack</b> web app with Node.js, Express.js, &
+						MongoDB. This app helps students learn math, allows teachers to post assignments, & animates word problems.
+						Project won 1st place in the Education Themed Track & Best Use of GitHub.</p>
+				</div>
+				<div class="col-sm-6">
+					<h3>Interfere Free Calc</h3><img src="https://abirhaque.github.io/Images/Interfere/png2.png" width="100%"><br>
+					<p>Description coming soon!</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h3>Interfere Cascade</h3><img src="https://abirhaque.github.io/Images/Interfere/png1.png" width="100%"><br>
+					<p>Description coming soon!</p>
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="row">
+				<h2 class="text-center">Contact</h2>
+				<div class="text-center">
+					<a href="mailto:abir.haque.usa@gmail.com">Email</a>,
+					<a href="https://github.com/AbirHaque" target="_blank">GitHub</a>,
+					<a href="https://www.linkedin.com/in/abirhaque/" target="_blank">LinkedIn</a>,
+					<a href="https://www.youtube.com/channel/UCQuF2wjRE-_h5wTmpQ8S-Tw" target="_blank">Youtube</a>,
+					<a href="https://repl.it/@AbirHaque" target="_blank">Repl.it</a>
+				</div>
+
+			</div>
+
+		</div>
+
+</body>
+<br>
+<br>
+<br>
+<br>
+<footer class="container-fluid text-center">
+	<p>© Abir Haque 2022</p>
+</footer>
+
 </html>
